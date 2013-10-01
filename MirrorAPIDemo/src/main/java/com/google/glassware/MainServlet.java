@@ -279,7 +279,7 @@ public class MainServlet extends HttpServlet {
     	    			+				"Miriam :"
     	    			+		"</p>"
     	    			+		"<hr>"
-    	    		    +		"<p class='text-normal'>"
+    	    		    +		"<p class='text-x-small'>"
     	    		    +  			"You’ll be fine as long as you don’t forget your boots!"
     	    		    +		"</p>"
     	    			+ 	"</section>"
@@ -342,7 +342,7 @@ public class MainServlet extends HttpServlet {
     			+		"</p>"
     			+		"<hr>"
     		    +		"<p class='text-normal'>"
-    		    +  			"I left these on the kitchen counter"
+    		    +  			"Hello There!!!"
     		    +		"</p>"
     			+ 	"</section>"
     			+ "</article>";
@@ -373,7 +373,7 @@ public class MainServlet extends HttpServlet {
     			+		"</p>"
     			+		"<hr>"
     		    +		"<p class='text-normal'>"
-    		    +  			"I left these on the kitchen counter"
+    		    +  			"Its going to be OK!"
     		    +		"</p>"
     			+ 	"</section>"
     			+ "</article>";
