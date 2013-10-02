@@ -423,8 +423,17 @@ public class MainServlet extends HttpServlet {
     	LOG.info("Welcome message inserted" + insertedItem4.getId() + " for user "
     	        + userId);
    
-    	//Insert contact
-    	/*TODO*/
+    	// Insert a contact
+        LOG.fine("Inserting contact Item");
+        Contact contact = new Contact();
+        contact.setId("MAKE_ME_SMILE");
+        contact.setDisplayName("MAKE ME SMILE");
+        contact.setImageUrls(Lists.newArrayList(req.getParameter("iconUrl")));
+        contact.setAcceptCommands(Lists.newArrayList(new Command().setType("POST_AN_UPDATE")));
+        contact.setSpeakableName("MAKE ME SMILE");
+        MirrorClient.insertContact(credential, contact);
+
+        message = "Inserted contact: " + req.getParameter("MAKE_ME_SMILE");
     
     } else {
       String operation = req.getParameter("operation");
