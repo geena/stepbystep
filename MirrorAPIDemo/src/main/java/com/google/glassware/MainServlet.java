@@ -249,12 +249,13 @@ public class MainServlet extends HttpServlet {
     	
     	final String WELCOME_HTML =
     			"<article class='photo'>"
-    			+	"<img src=" + WebUtil.buildUrl(req, "/static/images/smileWelcome.jpg") +" width='100%' height='100%'>"
-    			+	"<div class='photo-overlay'/>"
-    			+	"<section>"
-    			+	"<p class='text-auto-size'><strong> Welcome To Make Me Smile!!</strong></p>"
-    			+	"</section>"
-    			+	"</article>" ;
+    	    			+	"<img src=" + WebUtil.buildUrl(req, "/static/images/smileCover.jpg") +" width='100%' height='100%'>"
+    	    			+	"<div class='photo-overlay'/>"
+    	    			+	"<section>"
+    	    			+	"<p class='text-auto-size'> </p>"
+    	    			+	"</section>"
+    	    			+	"</article>" ;
+
    	
     	TimelineItem welcomeItem = new TimelineItem();
     	welcomeItem.setHtml(WELCOME_HTML);
@@ -269,21 +270,25 @@ public class MainServlet extends HttpServlet {
     	//Insert timeline cards
     	
     	final String CARD_ONE =
-    					"<article>"
-    	    			+ 	"<figure>"
-    	    			+		"<img src=" + WebUtil.buildUrl(req, "/static/images/Img1.png") +" >"
-    	    			+ 	"</figure>"
-    	    			+ 	"<section>"
-    	    			+		"<p class='yellow''text-x-small'>"
-    	    			+			"<img src="+ WebUtil.buildUrl(req, "/static/images/Mirriam.png") +" >"
-    	    			+				"Miriam :"
-    	    			+		"</p>"
-    	    			+		"<hr>"
-    	    		    +		"<p class='text-x-small'>"
-    	    		    +  			"You’ll be fine as long as you don’t forget your boots!"
-    	    		    +		"</p>"
-    	    			+ 	"</section>"
-    	    			+ "</article>";
+    			"<article>"
+    			+	"<img src=" + WebUtil.buildUrl(req, "/static/images/bgrAll.png") +" >"
+    			+ 	"<figure>"
+    			+		"<img src=" + WebUtil.buildUrl(req, "/static/images/Img.png") +" >"
+    			+ 	"</figure>"
+    			+ 	"<section>"
+    			+		"<h1 class='red text-x-small'>"
+    			+			"<img src="+ WebUtil.buildUrl(req, "/static/images/Mirriam1.png") +" >"
+    			+				"<strong>Miriam says..</strong>"
+    			+		"</h1>"
+    			+		"<hr>"
+    			+		"<p class='red text-x-small'>"
+    			+  			"<strong>You'll be fine as long as you don't forget your boots!</strong>"
+    			+		"</p>"
+    			+ 	"</section>"
+    			+ "</article>";
+    	
+    	
+    	
     	
     	TimelineItem Item1 = new TimelineItem();
     	Item1.setHtml(CARD_ONE);
@@ -292,6 +297,11 @@ public class MainServlet extends HttpServlet {
         // Built in actions
         menuItemList1.add(new MenuItem().setAction("SHARE"));
         menuItemList1.add(new MenuItem().setAction("DELETE"));
+        // And custom actions
+        List<MenuValue> menuValues1 = new ArrayList<MenuValue>();
+        menuValues1.add(new MenuValue().setIconUrl(WebUtil.buildUrl(req, "/static/images/smileBack.jpg"))
+            .setDisplayName("Smile Back"));
+        menuItemList1.add(new MenuItem().setValues(menuValues1).setId("smileBack").setAction("CUSTOM"));
         Item1.setMenuItems(menuItemList1);        
     	Item1.setNotification(new NotificationConfig().setLevel("DEFAULT"));
     	TimelineItem insertedItem1 = MirrorClient.insertTimelineItem(credential, Item1);
@@ -300,17 +310,18 @@ public class MainServlet extends HttpServlet {
     	
     	final String CARD_TWO =
     			"<article>"
-    			+ 	"<figure>"
+    	    	+	"<img src=" + WebUtil.buildUrl(req, "/static/images/bgrAll.png") +" >"
+    	    	+	"<figure>"
     			+		"<img src=" + WebUtil.buildUrl(req, "/static/images/Img3.png") +" >"
     			+ 	"</figure>"
     			+ 	"<section>"
-    			+		"<p class='yellow''text-x-small'>"
-    			+			"<img src="+ WebUtil.buildUrl(req, "/static/images/Molly.png") +" >"
-    			+				"Molly :"
-    			+		"</p>"
+    			+		"<h1 class='red text-x-small'>"
+    			+			"<img src="+ WebUtil.buildUrl(req, "/static/images/Molly1.png") +" >"
+    			+				"<strong>Molly says..</strong>"
+    			+		"</h1>"
     			+		"<hr>"
-    		    +		"<p class='text-normal'>"
-    		    +  			"I left these on the kitchen counter"
+    		    +		"<p class='red text-x-small'>"
+    		    +  			"<strong>I left these on the kitchen counter</strong>"
     		    +		"</p>"
     			+ 	"</section>"
     			+ "</article>";
@@ -322,6 +333,12 @@ public class MainServlet extends HttpServlet {
     	// Built in actions
         menuItemList2.add(new MenuItem().setAction("SHARE"));
         menuItemList2.add(new MenuItem().setAction("DELETE"));
+        // And custom actions
+        List<MenuValue> menuValues2 = new ArrayList<MenuValue>();
+        menuValues2.add(new MenuValue().setIconUrl(WebUtil.buildUrl(req, "/static/images/smileBack.jpg"))
+            .setDisplayName("Smile Back"));
+        menuItemList2.add(new MenuItem().setValues(menuValues2).setId("smileBack").setAction("CUSTOM"));
+        
         Item2.setMenuItems(menuItemList2);   
     	Item2.setNotification(new NotificationConfig().setLevel("DEFAULT"));
     	TimelineItem insertedItem2 = MirrorClient.insertTimelineItem(credential, Item2);
@@ -332,17 +349,18 @@ public class MainServlet extends HttpServlet {
 
     	final String CARD_THREE =
     			"<article>"
+    			+	"<img src=" + WebUtil.buildUrl(req, "/static/images/bgrAll.png") +" >"
     			+ 	"<figure>"
     			+		"<img src=" + WebUtil.buildUrl(req, "/static/images/Img2.png") +" >"
     			+ 	"</figure>"
     			+ 	"<section>"
-    			+		"<p class='yellow''text-x-small'>"
-    			+			"<img src="+ WebUtil.buildUrl(req, "/static/images/Mirriam.png") +" >"
-    			+				"Miriam :"
-    			+		"</p>"
+    			+		"<h1 class='red text-x-small'>"
+    			+			"<img src="+ WebUtil.buildUrl(req, "/static/images/Mirriam1.png") +" >"
+    			+				"<strong>Miriam says..</strong>"
+    			+		"</h1>"
     			+		"<hr>"
-    		    +		"<p class='text-normal'>"
-    		    +  			"Hello There!!!"
+    		    +		"<p class='red text-x-small'>"
+    		    +  			"<strong>Hello There!!!<strong>"
     		    +		"</p>"
     			+ 	"</section>"
     			+ "</article>";
@@ -354,6 +372,12 @@ public class MainServlet extends HttpServlet {
     	// Built in actions
         menuItemList3.add(new MenuItem().setAction("SHARE"));
         menuItemList3.add(new MenuItem().setAction("DELETE"));
+        // And custom actions
+        List<MenuValue> menuValues3 = new ArrayList<MenuValue>();
+        menuValues3.add(new MenuValue().setIconUrl(WebUtil.buildUrl(req, "/static/images/smileBack.jpg"))
+            .setDisplayName("Smile Back"));
+        menuItemList3.add(new MenuItem().setValues(menuValues3).setId("smileBack").setAction("CUSTOM"));
+        
         Item3.setMenuItems(menuItemList3); 
     	Item3.setNotification(new NotificationConfig().setLevel("DEFAULT"));
     	TimelineItem insertedItem3 = MirrorClient.insertTimelineItem(credential, Item3);
@@ -363,20 +387,22 @@ public class MainServlet extends HttpServlet {
 
     	final String CARD_FOUR =
     			"<article>"
+    			+	"<img src=" + WebUtil.buildUrl(req, "/static/images/bgrAll.png") +" >"
     			+ 	"<figure>"
     			+		"<img src=" + WebUtil.buildUrl(req, "/static/images/Img4.png") +" >"
     			+ 	"</figure>"
     			+ 	"<section>"
-    			+		"<p class='yellow''text-x-small'>"
-    			+			"<img src="+ WebUtil.buildUrl(req, "/static/images/Pattie.png") +" >"
-    			+				"Pattie :"
-    			+		"</p>"
+    			+		"<h1 class='red text-x-small'>"
+    			+			"<img src="+ WebUtil.buildUrl(req, "/static/images/Pattie1.png") +" >"
+    			+				"<strong>Pattie says..</strong>"
+    			+		"</h1>"
     			+		"<hr>"
-    		    +		"<p class='text-normal'>"
-    		    +  			"Its going to be OK!"
+    		    +		"<p class='red text-x-small'>"
+    		    +  			"<strong>Its going to be OK!</strong>"
     		    +		"</p>"
     			+ 	"</section>"
     			+ "</article>";
+    	
     	
     	TimelineItem Item4 = new TimelineItem();
     	Item4.setHtml(CARD_FOUR);
@@ -385,6 +411,12 @@ public class MainServlet extends HttpServlet {
     	// Built in actions
         menuItemList4.add(new MenuItem().setAction("SHARE"));
         menuItemList4.add(new MenuItem().setAction("DELETE"));
+        // And custom actions
+        List<MenuValue> menuValues4 = new ArrayList<MenuValue>();
+        menuValues4.add(new MenuValue().setIconUrl(WebUtil.buildUrl(req, "/static/images/smileBack.jpg"))
+            .setDisplayName("Smile Back"));
+        menuItemList4.add(new MenuItem().setValues(menuValues4).setId("smileBack").setAction("CUSTOM"));
+        
         Item4.setMenuItems(menuItemList4); 
     	Item4.setNotification(new NotificationConfig().setLevel("DEFAULT"));
     	TimelineItem insertedItem4 = MirrorClient.insertTimelineItem(credential, Item4);
@@ -392,11 +424,6 @@ public class MainServlet extends HttpServlet {
     	        + userId);
    
     	//Insert contact
-    	
-    	/*TODO*/
-    	
-       	//voice command "Post an Update"
-    	
     	/*TODO*/
     
     } else {
