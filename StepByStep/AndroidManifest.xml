@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="edu.neu.glass.stepByStep"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="18" />
+	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.WRITE_SETTINGS"/>
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/ThemeGlass" >
+        <activity
+            android:name="edu.neu.glass.stepByStep.AppHome"
+            android:label="@string/app_name"
+            android:screenOrientation="landscape" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="edu.neu.glass.stepByStep.EmergencyActivity"
+            android:label="@string/title_activity_emergency"
+            android:screenOrientation="landscape" >
+        </activity>
+        
+        <activity
+            android:name="edu.neu.glass.stepByStep.CallOptionsActivity"
+            android:label="@string/title_activity_emergency"
+            android:screenOrientation="landscape" >
+        </activity>
+        <activity
+            android:name="edu.neu.glass.stepByStep.EmergencyOptionsActivity"
+            android:label="@string/title_activity_emergency"
+            android:screenOrientation="landscape" >
+        </activity>
+        <activity
+            android:name="edu.neu.glass.stepByStep.TasksActivity"
+            android:label="@string/title_activity_choose_task" 
+            android:screenOrientation="landscape">
+        </activity>
+        
+        <activity
+            android:name="edu.neu.glass.stepByStep.ScriptPage1"
+            android:label="@string/title_activity_choose_task" 
+            android:screenOrientation="landscape">
+        </activity>
+        <activity
+            android:name="edu.neu.glass.stepByStep.DonePage"
+            android:label="@string/title_activity_choose_task" 
+            android:screenOrientation="landscape">
+        </activity>
+        <activity
+            android:name="edu.neu.glass.stepByStep.ThankYouPage"
+            android:label="@string/title_activity_choose_task" 
+            android:screenOrientation="landscape">
+        </activity>
+        
+    </application>
+
+</manifest>
