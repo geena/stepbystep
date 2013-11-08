@@ -7,7 +7,6 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
-import java.util.Map;
 
 import edu.neu.glass.stepByStep.R;
 import android.os.AsyncTask;
@@ -30,12 +29,11 @@ public class ScriptPage1 extends Activity implements GestureDetector.OnGestureLi
 
 	private GestureDetector gestureDetector;
 	public String Task_Name;
-	public String task_sf;
-	public String txt_sf;
 	public String glassName = "glass1";
 	public String SCRIPT_IMAGE_URL = "";
 	public String SCRIPT_TXT_URL ="";
 	public String NEXT_IMAGE_URL ="";
+	public static String HOST_URL = "http://glassphiteam1.weebly.com/uploads/2/4/6/8/24684595/";
 	public static HashMap<String,String> stepNbrDescMap = new HashMap<String,String>();
 	
 	@Override
@@ -69,18 +67,8 @@ public class ScriptPage1 extends Activity implements GestureDetector.OnGestureLi
 		Intent intent = getIntent();
 		Task_Name = intent.getExtras().getString("TASK_NAME");		
 		
-		if(Task_Name.equalsIgnoreCase("Grocery Shopping")){
-			task_sf = "gstore";
-			txt_sf ="gs";
-		}else{
-			task_sf = "lib";
-			txt_sf ="lb";
-		}
-		
-		SCRIPT_IMAGE_URL =  "http://www.ven-di.com/uploads/2/1/6/0/21601070/" + 
-		glassName + "_" + task_sf + "_" + 1 + ".jpg";
-		SCRIPT_TXT_URL =  "http://www.ven-di.com/uploads/2/1/6/0/21601070/" + 
-				glassName + "_" + txt_sf + "_" + "scripts" +".txt";
+		SCRIPT_IMAGE_URL =  HOST_URL + glassName + "_" + Task_Name + "_" + 1 + ".jpg";
+		SCRIPT_TXT_URL =  HOST_URL + glassName + "_" + Task_Name + "_" + "scripts" +".txt";
 		
 		new connectCall((ImageView)findViewById(R.id.imageViewStep)).execute(SCRIPT_IMAGE_URL,SCRIPT_TXT_URL);
 	}
@@ -228,14 +216,12 @@ public class ScriptPage1 extends Activity implements GestureDetector.OnGestureLi
 		if (velocityX < -2500 && (stepNbr > 1)) {
 			stepNbrtxt.setText("" + (stepNbr - 1));
 			stepDesctxt.setText(stepNbrDescMap.get("" + (stepNbr - 1)));
-			NEXT_IMAGE_URL = "http://www.ven-di.com/uploads/2/1/6/0/21601070/" + 
-					glassName + "_" + task_sf + "_" + (stepNbr - 1) + ".jpg";
+			NEXT_IMAGE_URL = HOST_URL + glassName + "_" + Task_Name + "_" + (stepNbr - 1) + ".jpg";
 			new loadImage((ImageView)findViewById(R.id.imageViewStep)).execute(NEXT_IMAGE_URL);
 		} else if (velocityX > 2500 && (stepNbr < stepNbrDescMap.size())) {
 			stepNbrtxt.setText("" + (stepNbr + 1));
 			stepDesctxt.setText(stepNbrDescMap.get("" + (stepNbr + 1)));
-			NEXT_IMAGE_URL = "http://www.ven-di.com/uploads/2/1/6/0/21601070/" + 
-					glassName + "_" + task_sf + "_" + (stepNbr + 1) + ".jpg";
+			NEXT_IMAGE_URL = HOST_URL + glassName + "_" + Task_Name + "_" + (stepNbr + 1) + ".jpg";
 			new loadImage((ImageView)findViewById(R.id.imageViewStep)).execute(NEXT_IMAGE_URL);
 		} else if (velocityX > 2500 && (stepNbr == stepNbrDescMap.size())){
 			Intent i = new Intent(this,DonePage.class);

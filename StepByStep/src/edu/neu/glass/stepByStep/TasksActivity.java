@@ -2,21 +2,15 @@ package edu.neu.glass.stepByStep;
 
 
 import java.io.BufferedReader;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.LinkedList;
 import java.util.List;
-
-import org.apache.http.message.BufferedHeader;
-
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -33,6 +27,7 @@ public class TasksActivity extends Activity implements GestureDetector.OnGesture
 	public static List<String> tasks = new LinkedList<String>() ;
 	public static String TASK_URL;
 	public static String glassName = "glass1";
+	public static String HOST_URL = "http://glassphiteam1.weebly.com/uploads/2/4/6/8/24684595/";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +56,7 @@ public class TasksActivity extends Activity implements GestureDetector.OnGesture
 		pickAnActivity.setTypeface(tfRobotoBlack);
 		TextView ScriptHeader = (TextView)findViewById(R.id.ScriptHeader);
 		ScriptHeader.setTypeface(tfRobotoThin);
-		TASK_URL = "http://www.ven-di.com/uploads/2/1/6/0/21601070/" + glassName + "_" + "tasks.txt";
+		TASK_URL = HOST_URL + glassName + "_" + "tasks.txt";
 		new loadTasks((TextView)findViewById(R.id.ScriptHeader)).execute(TASK_URL);;
 		
 	}
@@ -169,7 +164,8 @@ public class TasksActivity extends Activity implements GestureDetector.OnGesture
 		TextView ScriptHeader = (TextView)findViewById(R.id.ScriptHeader);
 		String taskName = ScriptHeader.getText().toString();
 		Intent i = new Intent(this,CallOptionsActivity.class);
-		i.putExtra("TASK_NAME", taskName);
+		taskName = taskName.toLowerCase();
+		i.putExtra("TASK_NAME",taskName.replace(" ", ""));
 		startActivity(i);
 		finish();
 		return true;
