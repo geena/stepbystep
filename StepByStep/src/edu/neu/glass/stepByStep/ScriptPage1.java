@@ -1,11 +1,22 @@
 package edu.neu.glass.stepByStep;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
+
 import edu.neu.glass.stepByStep.R;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.util.Log;
 import android.view.GestureDetector;
@@ -19,13 +30,13 @@ public class ScriptPage1 extends Activity implements GestureDetector.OnGestureLi
 
 	private GestureDetector gestureDetector;
 	public String Task_Name;
-	public String pichdr;
-	public String gsdesc1 = "Enter The Store";
-	public String gsdesc2 = "Pick Up 2 Boxes Of Pasta";
-	public String gsdesc3 = "Go To The Cashier";	
-	public String lbdesc1 = "Enter The Library";
-	public String lbdesc2 = "Pick Up Book";
-	public String lbdesc3 = "Checkout The Book";	
+	public String task_sf;
+	public String txt_sf;
+	public String glassName = "glass1";
+	public String SCRIPT_IMAGE_URL = "";
+	public String SCRIPT_TXT_URL ="";
+	public String NEXT_IMAGE_URL ="";
+	public static HashMap<String,String> stepNbrDescMap = new HashMap<String,String>();
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -55,28 +66,32 @@ public class ScriptPage1 extends Activity implements GestureDetector.OnGestureLi
 		TextView stepNbrtxt = (TextView)findViewById(R.id.helperhdrhelper);
 		stepNbrtxt.setTypeface(tfRobotoBlack);
 		
-		new connectCall().execute();
 		Intent intent = getIntent();
-		Task_Name = intent.getExtras().getString("TASK_NAME");
-		
-		ImageView imageViewStep = (ImageView)findViewById(R.id.imageViewStep);
+		Task_Name = intent.getExtras().getString("TASK_NAME");		
 		
 		if(Task_Name.equalsIgnoreCase("Grocery Shopping")){
-			pichdr = "gs";
-			stepNbrtxt.setText("1");
-			stepDesctxt.setText(gsdesc1);
-			imageViewStep.setImageResource(R.drawable.glass1_gstore_1);
+			task_sf = "gstore";
+			txt_sf ="gs";
 		}else{
-			pichdr = "lb";
-			stepNbrtxt.setText("1");
-			stepDesctxt.setText(lbdesc1);
-			imageViewStep.setImageResource(R.drawable.glass1_lib_1);
+			task_sf = "lib";
+			txt_sf ="lb";
 		}
+		
+		SCRIPT_IMAGE_URL =  "http://www.ven-di.com/uploads/2/1/6/0/21601070/" + 
+		glassName + "_" + task_sf + "_" + 1 + ".jpg";
+		SCRIPT_TXT_URL =  "http://www.ven-di.com/uploads/2/1/6/0/21601070/" + 
+				glassName + "_" + txt_sf + "_" + "scripts" +".txt";
+		
+		new connectCall((ImageView)findViewById(R.id.imageViewStep)).execute(SCRIPT_IMAGE_URL,SCRIPT_TXT_URL);
 	}
 	
-	public class connectCall extends AsyncTask<String, Integer, String>{
-
+	public class connectCall extends AsyncTask<String, Integer, Bitmap>{
+		ImageView bmImage;
 		ProgressDialog dialog;
+		
+		public connectCall(ImageView bmImage){
+			this.bmImage = bmImage;
+		}
 		
 		
 		protected void onPreExecute(){
@@ -88,7 +103,7 @@ public class ScriptPage1 extends Activity implements GestureDetector.OnGestureLi
 		}
 		
 		@Override
-		protected String doInBackground(String... params) {
+		protected Bitmap doInBackground(String... urls) {
 			// TODO Auto-generated method stub
 			
 			for(int i = 0 ; i < 50 ; i++){
@@ -100,14 +115,63 @@ public class ScriptPage1 extends Activity implements GestureDetector.OnGestureLi
 					e.printStackTrace();
 				}
 			}	
-			
+			String urldisplay = urls[0];
+			String file = urls[1];
+			BufferedReader br = null;
+			String line ="";
+			int stepNbr = 1;
+			try {
+				URL urltxt = new URL(file);
+				br = new BufferedReader(new InputStreamReader(urltxt.openStream()));
+				while((line = br.readLine()) != null){
+					stepNbrDescMap.put(Integer.toString(stepNbr), line);
+					stepNbr++;
+				}
+			} catch (MalformedURLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace(); 
+			}finally{
+				try {
+					br.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			Bitmap image = null;
+			InputStream in = null;
+			try{
+				in = new java.net.URL(urldisplay).openStream();
+				image = BitmapFactory.decodeStream(in);
+			}catch(Exception e){
+				
+			}finally{
+				try {
+					in.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+
 			dialog.dismiss();
 			
-			return null;
+			return image;
 		}
 		
 		protected void onProgressUpdate(Integer... progress){
 			dialog.incrementProgressBy(progress[0]);
+		}
+		
+		protected void onPostExecute(Bitmap result){
+			bmImage.setImageBitmap(result);
+			TextView stepNbrtxt = (TextView)findViewById(R.id.helperhdrhelper);
+			stepNbrtxt.setText("1");
+			TextView stepDesctxt = (TextView)findViewById(R.id.stepDesctxt);
+			stepDesctxt.setText(stepNbrDescMap.get("1"));
 		}
 		
 		
@@ -159,66 +223,88 @@ public class ScriptPage1 extends Activity implements GestureDetector.OnGestureLi
 		
 		TextView stepDesctxt = (TextView)findViewById(R.id.stepDesctxt);
 		TextView stepNbrtxt = (TextView)findViewById(R.id.helperhdrhelper);
-		ImageView imageViewStep = (ImageView)findViewById(R.id.imageViewStep);
 		int stepNbr = Integer.parseInt(stepNbrtxt.getText().toString());
 		
 		if (velocityX < -2500 && (stepNbr > 1)) {
-			
-			if(Task_Name.equalsIgnoreCase("Grocery Shopping")){
-				stepNbrtxt.setText("" + (stepNbr - 1));
-				if((stepNbr - 1) == 2){
-					stepDesctxt.setText(gsdesc2);
-					imageViewStep.setImageResource(R.drawable.glass1_gstore_7);
-				}
-				else if((stepNbr - 1) == 1){
-					stepDesctxt.setText(gsdesc1);
-					imageViewStep.setImageResource(R.drawable.glass1_gstore_1);
-				}
-			}else{
-				pichdr = "lb";
-				stepNbrtxt.setText("" + (stepNbr - 1));
-				if((stepNbr - 1) == 2){
-					stepDesctxt.setText(lbdesc2);
-					imageViewStep.setImageResource(R.drawable.glass1_lib_15);}
-				else if((stepNbr - 1) == 1){
-					stepDesctxt.setText(lbdesc1);
-					imageViewStep.setImageResource(R.drawable.glass1_lib_1);
-				}
-			}
-			
-        } else if (velocityX > 2500 && (stepNbr < 3)) {
-        	
-        	if(Task_Name.equalsIgnoreCase("Grocery Shopping")){
-    			pichdr = "gs";
-    			stepNbrtxt.setText("" + (stepNbr + 1));
-    			if((stepNbr + 1) == 2){
-					stepDesctxt.setText(gsdesc2);
-					imageViewStep.setImageResource(R.drawable.glass1_gstore_7);
-					}
-				else if((stepNbr + 1) == 3){
-					stepDesctxt.setText(gsdesc3);
-					imageViewStep.setImageResource(R.drawable.glass1_gstore_20);
-				}
-    		}else{
-    			pichdr = "lb";
-    			stepNbrtxt.setText("" + (stepNbr + 1));
-    			if((stepNbr + 1) == 2){
-					stepDesctxt.setText(lbdesc2);
-					imageViewStep.setImageResource(R.drawable.glass1_lib_15);
-					}
-				else if((stepNbr + 1) == 3){
-					stepDesctxt.setText(lbdesc3);
-					imageViewStep.setImageResource(R.drawable.glass1_lib_20);
-				}
-    		}
-        	//right
-        }else if (velocityX > 2500 && (stepNbr == 3)){
-        	Intent i = new Intent(this,DonePage.class);
+			stepNbrtxt.setText("" + (stepNbr - 1));
+			stepDesctxt.setText(stepNbrDescMap.get("" + (stepNbr - 1)));
+			NEXT_IMAGE_URL = "http://www.ven-di.com/uploads/2/1/6/0/21601070/" + 
+					glassName + "_" + task_sf + "_" + (stepNbr - 1) + ".jpg";
+			new loadImage((ImageView)findViewById(R.id.imageViewStep)).execute(NEXT_IMAGE_URL);
+		} else if (velocityX > 2500 && (stepNbr < stepNbrDescMap.size())) {
+			stepNbrtxt.setText("" + (stepNbr + 1));
+			stepDesctxt.setText(stepNbrDescMap.get("" + (stepNbr + 1)));
+			NEXT_IMAGE_URL = "http://www.ven-di.com/uploads/2/1/6/0/21601070/" + 
+					glassName + "_" + task_sf + "_" + (stepNbr + 1) + ".jpg";
+			new loadImage((ImageView)findViewById(R.id.imageViewStep)).execute(NEXT_IMAGE_URL);
+		} else if (velocityX > 2500 && (stepNbr == stepNbrDescMap.size())){
+			Intent i = new Intent(this,DonePage.class);
         	startActivity(i);
-        }
+		}
+		
+		
         return true;
 	}
 
+	public class loadImage extends AsyncTask<String, Integer, Bitmap>{
+		ImageView bmImage;
+		ProgressDialog dialog;
+		
+		public loadImage(ImageView bmImage){
+			this.bmImage = bmImage;
+		}
+		
+		
+		protected void onPreExecute(){
+			dialog = new ProgressDialog(ScriptPage1.this);
+			dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+			dialog.setMax(100);
+			dialog.setTitle("LOADING IMAGE...");
+			dialog.show();
+		}
+		
+		@Override
+		protected Bitmap doInBackground(String... urls) {
+			// TODO Auto-generated method stub
+			
+			for(int i = 0 ; i < 50 ; i++){
+				publishProgress(2);
+				try {
+					Thread.sleep(100);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}	
+			String urldisplay = urls[0];
+			Bitmap image = null;
+			InputStream in = null;
+			try{
+				in = new java.net.URL(urldisplay).openStream();
+				image = BitmapFactory.decodeStream(in);
+			}catch(Exception e){
+				
+			}finally{
+				try {
+					in.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+
+			dialog.dismiss();
+			return image;
+		}
+		
+		protected void onProgressUpdate(Integer... progress){
+			dialog.incrementProgressBy(progress[0]);
+		}
+		
+		protected void onPostExecute(Bitmap result){
+			bmImage.setImageBitmap(result);
+		}
+	}
 	@Override
 	public void onLongPress(MotionEvent e) {
 		// TODO Auto-generated method stub

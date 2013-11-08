@@ -86,6 +86,7 @@ public class CallOptionsActivity extends Activity implements GestureDetector.OnG
 		i.putExtra("TASK_NAME",TaskName);
 		i.putExtra("CALL_TYPE",Call_type);
 		startActivity(i);
+		finish();
 		return true;
 	}
 

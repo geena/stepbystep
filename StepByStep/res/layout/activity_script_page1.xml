@@ -17,10 +17,11 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:fontFamily="sans-serif-light"
+        android:maxHeight="300dp"
         android:maxWidth="250dp"
         android:text="@string/enter_the_store"
         android:textColor="@android:color/white"
-        android:textSize="30sp" />
+        android:textSize="28sp" />
 
     <ImageView
         android:id="@+id/imageViewStep"
@@ -33,7 +34,7 @@
         android:maxWidth="270dp"
         android:minWidth="270dp"
         android:scaleType="fitStart"
-        android:src="@drawable/glass1_gstore_1" />
+        android:src="@drawable/ic_launcher" />
 
     <TextView
         android:id="@+id/helperhdrhelper"
@@ -44,7 +45,7 @@
         android:fontFamily="sans-serif-light"
         android:text="@string/step_no_1"
         android:textColor="#FFD12A"
-        android:textSize="48sp" />
+        android:textSize="40sp" />
 
      <LinearLayout
         android:id="@+id/linearLayout1"

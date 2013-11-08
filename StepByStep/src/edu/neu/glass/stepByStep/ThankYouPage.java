@@ -71,7 +71,7 @@ public class ThankYouPage extends Activity implements GestureDetector.OnGestureL
 
 	@Override
 	public boolean onSingleTapConfirmed(MotionEvent e) {
-		// TODO Auto-generated method stub
+		finish();
 		return false;
 	}
 

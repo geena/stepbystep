@@ -73,6 +73,7 @@ public class DonePage extends Activity implements GestureDetector.OnGestureListe
 		Log.d("App Home","Starting new session");
 		Intent i = new Intent(this,ThankYouPage.class);
 		startActivity(i);
+		finish();
 		return true;
 	}
 
