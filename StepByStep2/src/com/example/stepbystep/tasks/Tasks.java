@@ -4,11 +4,13 @@ import com.example.stepbystep.R;
 import com.example.stepbystep.R.id;
 import com.example.stepbystep.R.layout;
 import com.example.stepbystep.R.menu;
+import com.paypal.android.base.commons.exception.InvalidStateException;
+import com.paypal.android.base.commons.patterns.mvc.model.DefaultModel;
 import com.paypal.android.base.commons.patterns.mvc.model.IModel;
+import com.paypal.android.base.commons.patterns.mvc.presenter.NavigationController;
 import com.paypal.android.base.commons.patterns.mvc.view.IView;
 import com.paypal.android.base.commons.ui.factories.ViewFactory;
-import com.paypal.here.activities.addoredititem.AddOrEditItemModel;
-import com.paypal.here.activities.addoredititem.AddOrEditItemView;
+import com.paypal.android.base.commons.validation.Assert;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -27,10 +29,15 @@ public class Tasks extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		_model = getModel(TasksModel.class);
-		_tasksView = ViewFactory.createView(TasksView.class, this, _model, this);
+		try {
+			_model = TasksModel.class.newInstance();
+		    _tasksView = TasksView.class.newInstance();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+		}
 		setContentView(_tasksView.getView());
-		setContentView(R.layout.activity_main);
 		
 		activities = (Button) findViewById(R.id.activities);
 		settings = (Button) findViewById(R.id.settings);
@@ -44,6 +51,5 @@ public class Tasks extends Activity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
-	
 
 }

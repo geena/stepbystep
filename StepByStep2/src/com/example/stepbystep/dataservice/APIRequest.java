@@ -20,6 +20,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.dropbox.sync.android.DbxAccountManager;
 import com.example.stepbystep.Closure;
 
 
@@ -40,6 +41,8 @@ public class APIRequest
 	private String _jsonString;
 	private static final int TIME_OUT = 10000;
 
+	private DbxAccountManager _acctMgr;
+
 	public Closure<Void, APIRequest, APIResponse> _successClosure;
 	public Closure<Void, APIRequest, APIResponse> _errorClosure;
 	public Closure<Void, APIRequest, APIResponse> _cancelClosure;
@@ -54,6 +57,10 @@ public class APIRequest
 		_errorClosure 	= errorClosure;
 		_cancelClosure 	= cancelClosure;
 		_response 	= new APIResponse();
+	}
+	
+	public void setAcctManager(DbxAccountManager acctMgr){
+		_acctMgr = acctMgr;
 	}
 
 	final Runnable resultsRunnable = new Runnable() {

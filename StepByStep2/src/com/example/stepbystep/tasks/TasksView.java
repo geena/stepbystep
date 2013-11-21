@@ -14,8 +14,9 @@ import com.example.stepbystep.TasksAdapter;
 import com.example.stepbystep.dataservice.Task;
 import com.paypal.android.base.commons.patterns.mvc.model.ModelChangeEvent;
 import com.paypal.android.base.commons.patterns.mvc.view.DefaultView;
+import com.paypal.android.base.commons.patterns.mvc.view.IView;
 
-public class TasksView extends DefaultView<TasksModel, LinearLayout>
+public class TasksView extends DefaultView<TasksModel, LinearLayout> implements IView
 {
 
 	private ActionBar _actionBar;
@@ -67,7 +68,7 @@ public class TasksView extends DefaultView<TasksModel, LinearLayout>
 		{
 			Task task = _adapter.getItem(position);
 			_model.setSelectedTask(task);
-			notifyViewListener(TasksView.this, TasksModel.SalesHistoryActions.TASK_SELECTED);
+			notifyViewListener(TasksView.this, TasksModel.TasksActions.TASK_SELECTED);
 		}
 	}
 
