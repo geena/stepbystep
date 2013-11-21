@@ -1,0 +1,76 @@
+int attr checked 0x7f01000b
+int attr command 0x7f010000
+int attr dataSource 0x7f010008
+int attr enabled 0x7f010004
+int attr formatter 0x7f010005
+int attr formatterType 0x7f010006
+int attr itemLayout 0x7f010009
+int attr selectedItem 0x7f01000a
+int attr text 0x7f010001
+int attr textColor 0x7f010002
+int attr updatedSourceTrigger 0x7f010007
+int attr visibility 0x7f010003
+int color minitab 0x7f090000
+int dimen activity_horizontal_margin 0x7f070000
+int dimen activity_vertical_margin 0x7f070001
+int drawable ic_launcher 0x7f020000
+int drawable ic_launcher_icon 0x7f020001
+int id action_settings 0x7f050009
+int id activities 0x7f050005
+int id afterTextChanged 0x7f050001
+int id beforeTextChanged 0x7f050002
+int id help 0x7f050007
+int id lostFocus 0x7f050004
+int id onTextChanged 0x7f050000
+int id pager 0x7f050008
+int id settings 0x7f050006
+int id valueChanged 0x7f050003
+int layout activity_main 0x7f030000
+int layout tasks 0x7f030001
+int menu main 0x7f0a0000
+int raw servers 0x7f040000
+int string action_settings 0x7f060001
+int string activities 0x7f060002
+int string app_name 0x7f060000
+int string help 0x7f060004
+int string settings 0x7f060003
+int style AppBaseTheme 0x7f080000
+int style AppTheme 0x7f080001
+int[] styleable Button { 0x7f010000, 0x7f010003, 0x7f010004 }
+int styleable Button_command 0
+int styleable Button_enabled 2
+int styleable Button_visibility 1
+int[] styleable CheckBox { }
+int[] styleable EditText { 0x7f010000, 0x7f010001, 0x7f010002, 0x7f010003, 0x7f010005, 0x7f010006, 0x7f010007 }
+int styleable EditText_command 0
+int styleable EditText_formatter 4
+int styleable EditText_formatterType 5
+int styleable EditText_text 1
+int styleable EditText_textColor 2
+int styleable EditText_updatedSourceTrigger 6
+int styleable EditText_visibility 3
+int[] styleable LinearLayout { 0x7f010000, 0x7f010003, 0x7f010004 }
+int styleable LinearLayout_command 0
+int styleable LinearLayout_enabled 2
+int styleable LinearLayout_visibility 1
+int[] styleable ListView { 0x7f010008, 0x7f010009, 0x7f01000a }
+int styleable ListView_dataSource 0
+int styleable ListView_itemLayout 1
+int styleable ListView_selectedItem 2
+int[] styleable RelativeLayout { 0x7f010000, 0x7f010003, 0x7f010004 }
+int styleable RelativeLayout_command 0
+int styleable RelativeLayout_enabled 2
+int styleable RelativeLayout_visibility 1
+int[] styleable TextView { 0x7f010000, 0x7f010001, 0x7f010002, 0x7f010003, 0x7f010005, 0x7f010006, 0x7f010007 }
+int styleable TextView_command 0
+int styleable TextView_formatter 4
+int styleable TextView_formatterType 5
+int styleable TextView_text 1
+int styleable TextView_textColor 2
+int styleable TextView_updatedSourceTrigger 6
+int styleable TextView_visibility 3
+int[] styleable ToggleButton { 0x7f010000, 0x7f010003, 0x7f010004, 0x7f01000b }
+int styleable ToggleButton_checked 3
+int styleable ToggleButton_command 0
+int styleable ToggleButton_enabled 2
+int styleable ToggleButton_visibility 1
