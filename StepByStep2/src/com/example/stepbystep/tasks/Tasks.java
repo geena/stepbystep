@@ -1,16 +1,8 @@
 package com.example.stepbystep.tasks;
 
 import com.example.stepbystep.R;
-import com.example.stepbystep.R.id;
-import com.example.stepbystep.R.layout;
-import com.example.stepbystep.R.menu;
-import com.paypal.android.base.commons.exception.InvalidStateException;
-import com.paypal.android.base.commons.patterns.mvc.model.DefaultModel;
 import com.paypal.android.base.commons.patterns.mvc.model.IModel;
-import com.paypal.android.base.commons.patterns.mvc.presenter.NavigationController;
 import com.paypal.android.base.commons.patterns.mvc.view.IView;
-import com.paypal.android.base.commons.ui.factories.ViewFactory;
-import com.paypal.android.base.commons.validation.Assert;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -28,7 +20,7 @@ public class Tasks extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+		/*
 		try {
 			_model = TasksModel.class.newInstance();
 		    _tasksView = TasksView.class.newInstance();
@@ -37,11 +29,8 @@ public class Tasks extends Activity {
 		} catch (InstantiationException e) {
 			e.printStackTrace();
 		}
+		*/
 		setContentView(_tasksView.getView());
-		
-		activities = (Button) findViewById(R.id.activities);
-		settings = (Button) findViewById(R.id.settings);
-		help = (Button) findViewById(R.id.help);
 		
 	}
 

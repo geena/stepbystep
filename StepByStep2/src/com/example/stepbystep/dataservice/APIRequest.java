@@ -112,10 +112,10 @@ public class APIRequest
 			JSONObject jsonObject = new JSONObject(json);
 			JSONArray results = jsonObject.getJSONArray("results");
 			for (int i = 0; i < results.length(); i++) {
-				_response.addName(results.getJSONObject(i).getString("name"));
+			//	_response.addName(results.getJSONObject(i).getString("name"));
 			}
 			_successClosure.invoke(this, _response);
-			_response.clearNames();
+		//	_response.clearNames();
 		}
 		catch (JsonParseException e1)
 		{

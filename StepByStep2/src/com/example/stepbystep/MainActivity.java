@@ -1,13 +1,20 @@
 package com.example.stepbystep;
 
+import java.io.IOException;
+
 import com.dropbox.sync.android.DbxAccountManager;
+import com.dropbox.sync.android.DbxException;
 import com.dropbox.sync.android.DbxException.Unauthorized;
+import com.dropbox.sync.android.DbxFile;
 import com.dropbox.sync.android.DbxFileSystem;
-import com.example.stepbystep.tasks.Tasks;
+import com.dropbox.sync.android.DbxPath;
+import com.dropbox.sync.android.DbxPath.InvalidPathException;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -18,18 +25,20 @@ public class MainActivity extends Activity {
 	Button activities;
 	Button settings;
 	Button help;
-	private DbxAccountManager _acctMgr;
-	private Activity context;
-	private DbxFileSystem dbxFs;
+	Context context;
+	DbxAccountManager _acctMgr;
+	DbxFileSystem dbxFs;
 	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		context = this;
+		setContentView(R.layout.activity_main);
+		
+        context = this;
 		
 		_acctMgr = DbxAccountManager.getInstance(getApplicationContext(), "j1bohgxwhlirlq6", "kamif5qmk6m7und");
-		setContentView(R.layout.activity_main);
 		
 		activities = (Button) findViewById(R.id.activities);
 		settings = (Button) findViewById(R.id.settings);
@@ -51,10 +60,11 @@ public class MainActivity extends Activity {
 		@Override
 		public void onClick(View v){
 			
-			_acctMgr.startLink(context, 0);
-			
-			Intent intent = new Intent(MainActivity.this, Tasks.class);
-			startActivity(intent);
+			if (!_acctMgr.hasLinkedAccount()){
+			_acctMgr.startLink((Activity) context, 0);
+			} else {
+				getFiles();
+			}
 		}
 
 	}
@@ -63,7 +73,7 @@ public class MainActivity extends Activity {
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 	    if (requestCode == 0) {
 	        if (resultCode == Activity.RESULT_OK) {
-	            getFiles();
+	        	getFiles();
 	        } else {
 	            // ... Link failed or was cancelled by the user.
 	        }
@@ -72,20 +82,32 @@ public class MainActivity extends Activity {
 	    }
 	}
 	
-	private void getFiles() {
-		try {
-			dbxFs = DbxFileSystem.forAccount(_acctMgr.getLinkedAccount());
-		} catch (Unauthorized e) {
-			e.printStackTrace();
-		}
-	}
-
 	private class SettingsListener implements OnClickListener{
 		@Override
 		public void onClick(View v){
 			
 		}
 
+	}
+	
+	private void getFiles(){
+    	DbxFile testFile = null;
+    	try {
+			DbxFileSystem dbxFs = DbxFileSystem.forAccount(_acctMgr.getLinkedAccount());
+			 testFile = dbxFs.open(new DbxPath("test.txt"));
+			    String contents = testFile.readString();
+			    Log.d("Dropbox Test", "File contents: " + contents);
+			} catch (Unauthorized e) {
+				e.printStackTrace();
+			} catch (InvalidPathException e) {
+				e.printStackTrace();
+			} catch (DbxException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			} finally {
+			    testFile.close();
+			}
 	}
 	
 	private class HelpListener implements OnClickListener{
