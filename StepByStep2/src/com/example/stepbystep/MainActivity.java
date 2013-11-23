@@ -2,6 +2,9 @@ package com.example.stepbystep;
 
 import java.io.IOException;
 
+import org.codehaus.jackson.JsonParseException;
+import org.codehaus.jackson.map.ObjectMapper;
+
 import com.dropbox.sync.android.DbxAccountManager;
 import com.dropbox.sync.android.DbxException;
 import com.dropbox.sync.android.DbxException.Unauthorized;
@@ -9,6 +12,7 @@ import com.dropbox.sync.android.DbxFile;
 import com.dropbox.sync.android.DbxFileSystem;
 import com.dropbox.sync.android.DbxPath;
 import com.dropbox.sync.android.DbxPath.InvalidPathException;
+import com.example.stepbystep.dropboxdata.APIResponse;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -97,6 +101,10 @@ public class MainActivity extends Activity {
 			 testFile = dbxFs.open(new DbxPath("test.txt"));
 			    String contents = testFile.readString();
 			    Log.d("Dropbox Test", "File contents: " + contents);
+			    APIResponse response = parse(contents);
+			    Register.register.put("allTasks", response);
+				Intent intent = new Intent(MainActivity.this, Tasks.class);
+				startActivity(intent);
 			} catch (Unauthorized e) {
 				e.printStackTrace();
 			} catch (InvalidPathException e) {
@@ -108,6 +116,25 @@ public class MainActivity extends Activity {
 			} finally {
 			    testFile.close();
 			}
+	}
+	
+	private APIResponse parse(String json)
+	{
+		APIResponse _response = new APIResponse();
+		try
+		{
+			_response = new ObjectMapper().readValue(json, APIResponse.class);
+			return _response;
+		}
+		catch (JsonParseException e1)
+		{
+			e1.printStackTrace();
+		}
+		catch (IOException e1)
+		{
+			e1.printStackTrace();
+		}
+		return null;
 	}
 	
 	private class HelpListener implements OnClickListener{

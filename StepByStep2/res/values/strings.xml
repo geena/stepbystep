@@ -6,5 +6,6 @@
     <string name="activities">Activities</string>
     <string name="settings">Settings</string>
     <string name="help">Helper Call/View</string>
+    <string name="addTask">Add a Task</string>
 
 </resources>
