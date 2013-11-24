@@ -26,6 +26,11 @@
             </intent-filter>
         </activity>
         <activity android:name="com.example.stepbystep.Tasks"/>
+        <activity android:name="com.example.stepbystep.SingleTask"/>
+        <activity android:name="com.example.stepbystep.EditSteps"/>
+        <activity android:name="com.example.stepbystep.AddorEditStep"/>
+        <activity android:name="com.example.stepbystep.PairGlass"/>
+        <activity android:name="com.example.stepbystep.Contact"/>
         <activity android:name="com.dropbox.sync.android.DbxAuthActivity" />
         <activity
             android:name="com.dropbox.client2.android.AuthActivity"

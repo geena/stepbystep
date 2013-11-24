@@ -90,6 +90,9 @@ public class MainActivity extends Activity {
 		@Override
 		public void onClick(View v){
 			
+			Intent intent = new Intent(MainActivity.this, PairGlass.class);
+			startActivity(intent);
+			
 		}
 
 	}
@@ -140,6 +143,9 @@ public class MainActivity extends Activity {
 	private class HelpListener implements OnClickListener{
 		@Override
 		public void onClick(View v){
+			
+			Intent intent = new Intent(MainActivity.this, Contact.class);
+			startActivity(intent);
 			
 		}
 
