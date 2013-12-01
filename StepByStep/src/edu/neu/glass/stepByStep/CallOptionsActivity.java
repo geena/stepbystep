@@ -15,7 +15,8 @@ import android.widget.TextView;
 public class CallOptionsActivity extends Activity implements GestureDetector.OnGestureListener,OnDoubleTapListener {
 
 	private GestureDetector gestureDetector;
-	
+	public String glassName;
+	public String TASK_FULLNAME;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -38,12 +39,16 @@ public class CallOptionsActivity extends Activity implements GestureDetector.OnG
 		TextView needHelptxt = (TextView) findViewById(R.id.needHelptxt);
 		needHelptxt.setTypeface(tfRobotoLight);
 		
+		taptaptxt.setKeepScreenOn(true);
+		
 		Typeface tfRobotoThin = Typeface.createFromAsset(getAssets(), "fonts/roboto_thin.ttf");
 		TextView CallOptionTxtView = (TextView)findViewById(R.id.CallOptionTxtViewHelper);
 		CallOptionTxtView.setTypeface(tfRobotoThin);
 		TextView CallOptionsTxt = (TextView)findViewById(R.id.helperhdrhelper);
 		CallOptionsTxt.setTypeface(tfRobotoBlack);
-		
+		Intent intent = getIntent();
+		glassName = intent.getExtras().getString("glassName");
+		Log.d("glass - ", glassName);
 		
 	}
 
@@ -65,6 +70,7 @@ public class CallOptionsActivity extends Activity implements GestureDetector.OnG
 	public boolean onDoubleTap(MotionEvent e) {
 		Log.d("App Home","Starting Emergency Activity");
 		Intent i = new Intent(this,EmergencyActivity.class);
+		i.putExtra("glassName",glassName);
 		startActivity(i);
 		return true;
 	}
@@ -80,11 +86,14 @@ public class CallOptionsActivity extends Activity implements GestureDetector.OnG
 		Log.d("App Home","Starting new session");
 		Intent intent = getIntent();
 		String TaskName = intent.getStringExtra("TASK_NAME");
+		String TASK_FULLNAME = intent.getStringExtra("TASK_FULLNAME");
 		TextView callOptionsTxt = (TextView) findViewById(R.id.CallOptionTxtViewHelper);
 		String Call_type = callOptionsTxt.getText().toString();
 		Intent i = new Intent(this,ScriptPage1.class);
 		i.putExtra("TASK_NAME",TaskName);
+		i.putExtra("TASK_FULLNAME", TASK_FULLNAME);
 		i.putExtra("CALL_TYPE",Call_type);
+		i.putExtra("glassName",glassName);
 		startActivity(i);
 		finish();
 		return true;
@@ -105,11 +114,17 @@ public class CallOptionsActivity extends Activity implements GestureDetector.OnG
 			if(callOptionsTxt.getText().toString().equalsIgnoreCase("Start Audio Call?")){
         		callOptionsTxt.setText("Start Video Call?");
         		callOptionsTxt.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, R.drawable.video_icon1);
-        	}    
+        	} else if(callOptionsTxt.getText().toString().equalsIgnoreCase("No Call"))   {
+        		callOptionsTxt.setText("Start Audio Call?");
+        		callOptionsTxt.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, R.drawable.audio_icon);
+        	}
         } else if (velocityX > 2500) {
         	if(callOptionsTxt.getText().toString().equalsIgnoreCase("Start Video Call?")){
         		callOptionsTxt.setText("Start Audio Call?");
         		callOptionsTxt.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, R.drawable.audio_icon);
+        	}else if(callOptionsTxt.getText().toString().equalsIgnoreCase("Start Audio Call?")){
+        		callOptionsTxt.setText("No Call");
+        		callOptionsTxt.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, R.drawable.nocall_icon);
         	}
         }
 		return true;

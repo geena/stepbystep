@@ -19,9 +19,9 @@
         android:fontFamily="sans-serif-light"
         android:maxHeight="300dp"
         android:maxWidth="250dp"
-        android:text="@string/enter_the_store"
+        android:text="@string/stepDesc"
         android:textColor="@android:color/white"
-        android:textSize="28sp" />
+        android:textSize="30sp" />
 
     <ImageView
         android:id="@+id/imageViewStep"
@@ -45,7 +45,7 @@
         android:fontFamily="sans-serif-light"
         android:text="@string/step_no_1"
         android:textColor="#FFD12A"
-        android:textSize="40sp" />
+        android:textSize="30sp" />
 
      <LinearLayout
         android:id="@+id/linearLayout1"
@@ -74,24 +74,6 @@
             android:text="@string/back" />
 
         <TextView
-            android:id="@+id/taptxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="1"
-            android:gravity="fill_horizontal"
-            android:text="@string/tap"
-            android:textColor="#FFD12A" />
-
-        <TextView
-            android:id="@+id/wantThistxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="1"
-            android:text="@string/i_want_this" />
-
-        <TextView
             android:id="@+id/taptaptxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -110,5 +92,16 @@
             android:text="@string/i_need_help" />
 
     </LinearLayout>
+
+     <TextView
+         android:id="@+id/donetxt"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_centerInParent="true"
+         android:fontFamily="sans-serif"
+         android:text="@string/done"
+         android:textColor="#FFF"
+         android:textSize="60sp"
+         android:visibility="invisible" />
 
 </RelativeLayout>
