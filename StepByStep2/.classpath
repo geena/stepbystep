@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="gen"/>
+	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
+	<classpathentry kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Reggie/sandbox/Vendi/libs/jackson-core-asl-1.9.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Reggie/sandbox/Vendi/libs/jackson-mapper-asl-1.9.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Reggie/sandbox/Vendi/libs/json-lib-2.4-jdk15.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Reggie/sandbox/Vendi/libs/json-simple-1.1.1.jar"/>
+	<classpathentry kind="output" path="bin/classes"/>
+</classpath>
