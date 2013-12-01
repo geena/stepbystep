@@ -64,7 +64,7 @@ public final class R {
 		public static final int EditText_visibility = 3;
 	}
 	public static final class drawable {
-		public static final int ic_launcher_icon = 0x7f020001;
+		public static final int ic_launcher_icon = 0x7f020002;
 	}
 	public static final class attr {
 		public static final int formatter = 0x7f010005;

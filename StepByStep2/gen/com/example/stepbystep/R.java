@@ -123,8 +123,9 @@ containing a value of this type.
         public static final int activity_vertical_margin=0x7f070001;
     }
     public static final class drawable {
-        public static final int ic_launcher=0x7f020000;
-        public static final int ic_launcher_icon=0x7f020001;
+        public static final int camera_icon=0x7f020000;
+        public static final int ic_launcher=0x7f020001;
+        public static final int ic_launcher_icon=0x7f020002;
     }
     public static final class id {
         public static final int action_settings=0x7f050014;
@@ -154,9 +155,10 @@ containing a value of this type.
         public static final int addcontact=0x7f030001;
         public static final int addoreditstep=0x7f030002;
         public static final int editsteps=0x7f030003;
-        public static final int pairglass=0x7f030004;
-        public static final int singletask=0x7f030005;
-        public static final int tasks=0x7f030006;
+        public static final int generic=0x7f030004;
+        public static final int pairglass=0x7f030005;
+        public static final int singletask=0x7f030006;
+        public static final int tasks=0x7f030007;
     }
     public static final class menu {
         public static final int main=0x7f0a0000;
@@ -172,7 +174,10 @@ containing a value of this type.
         public static final int addTitle=0x7f06000d;
         public static final int addcontact=0x7f060011;
         public static final int addeditstep=0x7f060009;
+        public static final int addphotoexisting=0x7f060014;
+        public static final int addphotonew=0x7f060015;
         public static final int app_name=0x7f060000;
+        public static final int changeimage=0x7f060016;
         public static final int choosePhase=0x7f060006;
         public static final int contactname=0x7f060012;
         public static final int contactnumber=0x7f060013;

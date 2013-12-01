@@ -13,8 +13,9 @@ int attr visibility 0x7f010003
 int color minitab 0x7f090000
 int dimen activity_horizontal_margin 0x7f070000
 int dimen activity_vertical_margin 0x7f070001
-int drawable ic_launcher 0x7f020000
-int drawable ic_launcher_icon 0x7f020001
+int drawable camera_icon 0x7f020000
+int drawable ic_launcher 0x7f020001
+int drawable ic_launcher_icon 0x7f020002
 int id action_settings 0x7f050014
 int id activities 0x7f050005
 int id addStep 0x7f05000c
@@ -40,9 +41,10 @@ int layout activity_main 0x7f030000
 int layout addcontact 0x7f030001
 int layout addoreditstep 0x7f030002
 int layout editsteps 0x7f030003
-int layout pairglass 0x7f030004
-int layout singletask 0x7f030005
-int layout tasks 0x7f030006
+int layout generic 0x7f030004
+int layout pairglass 0x7f030005
+int layout singletask 0x7f030006
+int layout tasks 0x7f030007
 int menu main 0x7f0a0000
 int raw servers 0x7f040000
 int string action_settings 0x7f060001
@@ -52,7 +54,10 @@ int string addTask 0x7f060005
 int string addTitle 0x7f06000d
 int string addcontact 0x7f060011
 int string addeditstep 0x7f060009
+int string addphotoexisting 0x7f060014
+int string addphotonew 0x7f060015
 int string app_name 0x7f060000
+int string changeimage 0x7f060016
 int string choosePhase 0x7f060006
 int string contactname 0x7f060012
 int string contactnumber 0x7f060013

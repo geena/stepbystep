@@ -41,7 +41,7 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 		
         context = this;
-		
+        
 		_acctMgr = DbxAccountManager.getInstance(getApplicationContext(), "j1bohgxwhlirlq6", "kamif5qmk6m7und");
 		
 		activities = (Button) findViewById(R.id.activities);

@@ -21,6 +21,9 @@
     <string name="addcontact">Add Emergency Contact</string>
     <string name="contactname">Contact Name</string>
     <string name="contactnumber">Contact Number</string>
+    <string name="addphotoexisting">Upload Photo</string>
+    <string name="addphotonew">Take Photo</string>
+    <string name="changeimage">Change Image</string>
     
 
 </resources>
