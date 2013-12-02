@@ -271,7 +271,7 @@ public class AddorEditStep extends Activity {
 		DbxFile testFile = null;
 		try {
 			DbxFileSystem dbxFs = DbxFileSystem.forAccount(_acctMgr.getLinkedAccount());
-			testFile = dbxFs.open(new DbxPath("test.txt"));
+			testFile = dbxFs.open(new DbxPath("glass1.txt"));
 			if (!json.contentEquals("")){
 				testFile.writeString(json);
 			}

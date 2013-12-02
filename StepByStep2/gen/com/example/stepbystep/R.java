@@ -182,6 +182,7 @@ containing a value of this type.
         public static final int contactname=0x7f060012;
         public static final int contactnumber=0x7f060013;
         public static final int editSteps=0x7f060007;
+        public static final int editscript=0x7f060017;
         public static final int glassid=0x7f06000f;
         public static final int help=0x7f060004;
         public static final int pairglass=0x7f06000e;

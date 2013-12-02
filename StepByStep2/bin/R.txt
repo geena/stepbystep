@@ -62,6 +62,7 @@ int string choosePhase 0x7f060006
 int string contactname 0x7f060012
 int string contactnumber 0x7f060013
 int string editSteps 0x7f060007
+int string editscript 0x7f060017
 int string glassid 0x7f06000f
 int string help 0x7f060004
 int string pairglass 0x7f06000e

@@ -1,5 +1,7 @@
 package com.example.stepbystep;
 
+import com.example.stepbystep.dropboxdata.Task;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -27,6 +29,8 @@ public class SingleTask extends Activity {
 		editSteps = (Button) findViewById(R.id.editsteps);
 		save = (Button) findViewById(R.id.savechanges);
 		title = (EditText) findViewById(R.id.addTitle);
+		Task current = (Task) Register.register.get("currentTask");
+		title.setText(current.getTitle());
 	
 		phase.setOnClickListener(new PhaseListener());
 		editSteps.setOnClickListener(new EditStepsListener());

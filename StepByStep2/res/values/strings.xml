@@ -4,8 +4,8 @@
     <string name="app_name">StepByStep</string>
     <string name="action_settings">Settings</string>
     <string name="activities">Activities</string>
-    <string name="settings">Settings</string>
-    <string name="help">Helper Call/View</string>
+    <string name="settings">Pair Glass</string>
+    <string name="help">Emergency Contact</string>
     <string name="addTask">Add a Task</string>
     <string name="choosePhase">Choose Phase</string>
     <string name="editSteps">Edit Steps</string>
@@ -24,6 +24,7 @@
     <string name="addphotoexisting">Upload Photo</string>
     <string name="addphotonew">Take Photo</string>
     <string name="changeimage">Change Image</string>
+    <string name="editscript">Add a Description</string>
     
 
 </resources>

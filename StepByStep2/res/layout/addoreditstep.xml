@@ -19,41 +19,60 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:paddingBottom="20dip"
-            android:text="@string/addeditstep" >
+            android:text="@string/addeditstep"
+            android:textSize="24sp" >
         </TextView>
 
         <ImageView
             android:id="@+id/stepImage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="212dp"
+            android:layout_height="200dip"
             android:layout_gravity="center"
-            android:paddingBottom="10dip" >
+            android:paddingBottom="10dip"
+            android:scaleType="fitXY" >
         </ImageView>
-        
+
         <Button
             android:id="@+id/uploadImage"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:paddingBottom="10dip"
+            android:layout_marginBottom="10dip"
             android:text="@string/uploadImage"
-            android:paddingBottom="10dip" >
+            android:textSize="24sp" >
         </Button>
 
-        <EditText
-            android:id="@+id/script"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:paddingBottom="20dip"/>
-        
+            android:layout_marginBottom="20dip"
+            android:layout_gravity="center" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginRight="10dip"
+                android:textSize="18sp"
+                android:text="@string/editscript" />
+            
+            <EditText
+                android:id="@+id/script"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+
+        </LinearLayout>
+
         <Button
             android:id="@+id/saveStep"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/savechanges" >
+            android:text="@string/savechanges"
+            android:textSize="24sp" >
         </Button>
-
     </LinearLayout>
 
 </RelativeLayout>
