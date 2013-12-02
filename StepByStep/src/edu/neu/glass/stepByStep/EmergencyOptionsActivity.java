@@ -1,22 +1,30 @@
 package edu.neu.glass.stepByStep;
 
-import edu.neu.glass.stepByStep.R;
-import android.net.Uri;
-import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.GestureDetector;
-import android.view.Menu;
 import android.view.GestureDetector.OnDoubleTapListener;
+import android.view.Menu;
 import android.view.MotionEvent;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.openclove.ovx.OVXCallListener;
+import com.openclove.ovx.OVXException;
+import com.openclove.ovx.OVXView;
 
 public class EmergencyOptionsActivity extends Activity implements GestureDetector.OnGestureListener,OnDoubleTapListener {
 
 	private GestureDetector gestureDetector;
-	
+	public static String CALL_TYPE;
+	public static OVXView ovxView;
+	private ScriptPage1 currentActivity;
+	public static String USER_ID = "GLASS_USER";
+	public static String GROUP_ID = "";
+	public String glassName ="";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -45,8 +53,51 @@ public class EmergencyOptionsActivity extends Activity implements GestureDetecto
 		TextView helperhdrhelper = (TextView)findViewById(R.id.helperhdrhelper);
 		helperhdrhelper.setTypeface(tfRobotoBlack);
 		
+		Intent intent = getIntent();
+		glassName = intent.getExtras().getString("glassName");
+		GROUP_ID = glassName;
+		taptaptxt.setKeepScreenOn(true);
+		ovxView = OVXView.getOVXContext(this);
 		
 	}
+	
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		
+		//exit the call before destroying the activity
+		if (!ovxView.isCallOn()) {
+			ovxView.exitCall();
+		}
+		
+		//and free the resources used by OVX context
+		ovxView.unregister();		
+
+
+		android.os.Process.killProcess(android.os.Process.myPid());
+	}
+	
+	@Override
+	public void onResume(){
+		super.onResume();
+		//exit the call before destroying the activity
+		if (!ovxView.isCallOn()) {
+			ovxView.exitCall();
+		}
+				
+			
+	}	
+	@Override
+	public void onPause(){
+		super.onPause();
+		//exit the call before destroying the activity
+		if (!ovxView.isCallOn()) {
+			ovxView.exitCall();
+		}
+				
+			
+	}
+	
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -64,9 +115,6 @@ public class EmergencyOptionsActivity extends Activity implements GestureDetecto
 
 	@Override
 	public boolean onDoubleTap(MotionEvent e) {
-		Log.d("App Home","Starting Emergency Activity");
-		Intent i = new Intent(this,EmergencyActivity.class);
-		startActivity(i);
 		return true;
 	}
 
@@ -79,8 +127,88 @@ public class EmergencyOptionsActivity extends Activity implements GestureDetecto
 	@Override
 	public boolean onSingleTapConfirmed(MotionEvent e) {
 		
+		TextView callType = (TextView)findViewById(R.id.CallOptionTxtViewHelper);
+		String callString = callType.toString();
+		if (callString.equalsIgnoreCase("Video call with helper?")){
+			CALL_TYPE = "VideoCall";
+		}else{
+			CALL_TYPE = "AudioCall";
+		}
+	
 		
-		return false;
+		try {
+			ovxView.setApiKey("ph74wfeexb8q7s2bnkyeekg8");
+			ovxView.setOvxUserId(USER_ID);
+			ovxView.setOvxGroupId(GROUP_ID);
+			ovxView.setShowOVXMenuOnTap(false);
+			ovxView.setVisibility(false);
+			ovxView.setRemoteViewWidth(640);
+			ovxView.setRemoteViewHeight(360);
+			ovxView.enableRemoteGesture(true);	
+			//ovxView.setVideoCodec("vp9");
+			if (!ovxView.isCallOn()) {
+				//Checks if the call is on 
+				try {
+					ovxView.call(); // Initiates call and starts a session with the specified OVX group id and other parameters set earlier. 
+					ovxView.addOtherUserToGroupChat("voice", "TEL","CARETAKER_USER");
+				} catch (OVXException ex) {
+					// TODO Auto-generated catch block
+					ex.printStackTrace();
+				}
+			}else{
+				try {
+					ovxView.exitCall();
+					ovxView.call(); // Initiates call and starts a session with the specified OVX group id and other parameters set earlier. 
+					ovxView.addOtherUserToGroupChat("voice", "TEL","CARETAKER_USER");
+				} catch (OVXException exe) {
+					// TODO Auto-generated catch block
+					exe.printStackTrace();
+				}
+			}	
+			callListener();
+			
+		}catch (OVXException exw) {
+			// TODO Auto-generated catch block
+			exw.printStackTrace();
+		}
+		
+		
+		return true;
+	}
+	
+	
+	
+	private void callListener() {
+		ovxView.setCallListener(new OVXCallListener() {
+
+			@Override
+			public void callEnded() {
+				Toast.makeText(getApplicationContext(), "Call Ended", Toast.LENGTH_SHORT).show();
+			}
+
+			@Override
+			public void callFailed() {
+				Toast.makeText(getApplicationContext(), "Call Failed", Toast.LENGTH_SHORT).show();
+			}
+
+			@Override
+			public void callStarted() {
+				Toast.makeText(getApplicationContext(), "Call Started", Toast.LENGTH_SHORT).show();
+			}
+
+			@Override
+			public void callTerminated(String arg0) {
+				Toast.makeText(getApplicationContext(), "Call Terminated", Toast.LENGTH_SHORT).show();
+			}
+
+			@Override
+			public void ovxReceivedData(String arg0) {
+				
+			}
+			
+			
+		});
+		
 	}
 
 	@Override

@@ -8,6 +8,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.LinkedList;
 import java.util.List;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -26,7 +27,7 @@ public class TasksActivity extends Activity implements GestureDetector.OnGesture
 	private GestureDetector gestureDetector;
 	public static List<String> tasks = new LinkedList<String>() ;
 	public static String TASK_URL;
-	public static String glassName = "glass1";
+	public static String glassName = "";
 	public static String HOST_URL = "http://glassphiteam1.weebly.com/uploads/2/4/6/8/24684595/";
 	
 	@Override
@@ -51,13 +52,20 @@ public class TasksActivity extends Activity implements GestureDetector.OnGesture
 		TextView needHelptxt = (TextView) findViewById(R.id.needHelptxt);
 		needHelptxt.setTypeface(tfRobotoLight);
 		
+		taptaptxt.setKeepScreenOn(true);
+		
 		Typeface tfRobotoThin = Typeface.createFromAsset(getAssets(), "fonts/roboto_thin.ttf");
 		TextView pickAnActivity = (TextView)findViewById(R.id.pickAnActivity);
 		pickAnActivity.setTypeface(tfRobotoBlack);
 		TextView ScriptHeader = (TextView)findViewById(R.id.ScriptHeader);
 		ScriptHeader.setTypeface(tfRobotoThin);
+		
+		Intent intent = getIntent();	
+		glassName = intent.getExtras().getString("LOGIN");
+		Log.d("login", glassName);
+		
 		TASK_URL = HOST_URL + glassName + "_" + "tasks.txt";
-		new loadTasks((TextView)findViewById(R.id.ScriptHeader)).execute(TASK_URL);;
+		new loadTasks((TextView)findViewById(R.id.ScriptHeader)).execute(TASK_URL);
 		
 	}
 	
@@ -148,6 +156,7 @@ public class TasksActivity extends Activity implements GestureDetector.OnGesture
 	public boolean onDoubleTap(MotionEvent e) {
 		Log.d("App Home","Starting Emergency Activity");
 		Intent i = new Intent(this,EmergencyActivity.class);
+		i.putExtra("glassName",glassName);
 		startActivity(i);	
 	return true;
 	}
@@ -164,8 +173,11 @@ public class TasksActivity extends Activity implements GestureDetector.OnGesture
 		TextView ScriptHeader = (TextView)findViewById(R.id.ScriptHeader);
 		String taskName = ScriptHeader.getText().toString();
 		Intent i = new Intent(this,CallOptionsActivity.class);
+		i.putExtra("TASK_FULLNAME", taskName);
 		taskName = taskName.toLowerCase();
 		i.putExtra("TASK_NAME",taskName.replace(" ", ""));
+		Log.d("glass - ", glassName);
+		i.putExtra("glassName",glassName);
 		startActivity(i);
 		finish();
 		return true;

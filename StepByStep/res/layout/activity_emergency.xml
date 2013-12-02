@@ -27,15 +27,6 @@
         android:orientation="horizontal" >
 
         <TextView
-            android:id="@+id/nxtChoicetxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:drawableLeft="@drawable/next_choice"
-            android:gravity="center_vertical"
-            android:text="@string/nextChoice" />
-
-        <TextView
             android:id="@+id/backtxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -1,20 +1,19 @@
 package edu.neu.glass.stepByStep;
 
-import edu.neu.glass.stepByStep.R;
-import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
-import android.util.Log;
+import android.os.Bundle;
 import android.view.GestureDetector;
-import android.view.Menu;
 import android.view.GestureDetector.OnDoubleTapListener;
+import android.view.Menu;
 import android.view.MotionEvent;
 import android.widget.TextView;
 
 public class EmergencyActivity extends Activity implements GestureDetector.OnGestureListener,OnDoubleTapListener {
 
 	private GestureDetector gestureDetector;
+	public String glassName="";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -25,10 +24,8 @@ public class EmergencyActivity extends Activity implements GestureDetector.OnGes
 		Typeface tfRobotoBlack = Typeface.createFromAsset(getAssets(), "fonts/roboto_black.ttf");
 		Typeface tfRobotoLight = Typeface.createFromAsset(getAssets(), "fonts/roboto_light.ttf");
 		Typeface tfRobotoRegular = Typeface.createFromAsset(getAssets(), "fonts/roboto_regular.ttf");
-		TextView nxtChoicetxt = (TextView) findViewById(R.id.nxtChoicetxt);
-		nxtChoicetxt.setTypeface(tfRobotoLight);
 		TextView backtxt = (TextView) findViewById(R.id.backtxt);
-		backtxt.setTypeface(tfRobotoLight);
+		backtxt.setTypeface(tfRobotoLight);		
 		TextView taptxt = (TextView) findViewById(R.id.taptxt);
 		taptxt.setTypeface(tfRobotoRegular);
 		TextView wantThistxt = (TextView) findViewById(R.id.wantThistxt);
@@ -37,6 +34,9 @@ public class EmergencyActivity extends Activity implements GestureDetector.OnGes
 		taptaptxt.setTypeface(tfRobotoRegular);
 		TextView needHelptxt = (TextView) findViewById(R.id.needHelptxt);
 		needHelptxt.setTypeface(tfRobotoLight);
+		Intent intent = getIntent();
+		glassName = intent.getExtras().getString("glassName");
+		taptaptxt.setKeepScreenOn(true);
 	}
 
 	@Override
@@ -55,10 +55,11 @@ public class EmergencyActivity extends Activity implements GestureDetector.OnGes
 
 	@Override
 	public boolean onDoubleTap(MotionEvent e) {
-		Log.d("App Home","Starting Emergency Activity");
+		/*Log.d("App Home","Starting Emergency Activity");
 		Intent i = new Intent(this,EmergencyActivity.class);
-		startActivity(i);
-		return true;
+		i.putExtra("glassName",glassName);
+		startActivity(i);*/
+		return false;
 	}
 
 	@Override
@@ -70,6 +71,7 @@ public class EmergencyActivity extends Activity implements GestureDetector.OnGes
 	@Override
 	public boolean onSingleTapConfirmed(MotionEvent e) {
 		Intent i = new Intent(this,EmergencyOptionsActivity.class);
+		i.putExtra("glassName",glassName);
 		startActivity(i);
 		return true;
 	}
