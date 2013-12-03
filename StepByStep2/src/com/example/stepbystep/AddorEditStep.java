@@ -1,9 +1,4 @@
 package com.example.stepbystep;
-
-import java.io.BufferedInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 
@@ -12,28 +7,17 @@ import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.ObjectWriter;
 
-import com.dropbox.sync.android.DbxAccountManager;
-import com.dropbox.sync.android.DbxException;
-import com.dropbox.sync.android.DbxException.Unauthorized;
-import com.dropbox.sync.android.DbxFile;
-import com.dropbox.sync.android.DbxFileSystem;
-import com.dropbox.sync.android.DbxPath;
-import com.dropbox.sync.android.DbxPath.InvalidPathException;
 import com.example.stepbystep.dropboxdata.APIResponse;
 import com.example.stepbystep.dropboxdata.Step;
 import com.example.stepbystep.dropboxdata.Task;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Bitmap.CompressFormat;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -49,8 +33,6 @@ public class AddorEditStep extends Activity {
 	Button save;
 	Bitmap imageBitmap;
 	String imageURL;
-	DbxAccountManager _acctMgr;
-	DbxFileSystem dbxFs;
 	Context context;
 	Step _step;
 	Drawable _drawImage;
@@ -61,63 +43,33 @@ public class AddorEditStep extends Activity {
 
 		setContentView(R.layout.addoreditstep);
 
-		_step = (Step) Register.register.get("editStep");
-
-		context = this;
-
-		_acctMgr = DbxAccountManager.getInstance(getApplicationContext(), "j1bohgxwhlirlq6", "kamif5qmk6m7und");
-
 		_image = (ImageView) findViewById(R.id.stepImage);
 		script = (EditText) findViewById(R.id.script);
 		uploadImage = (Button) findViewById(R.id.uploadImage);
 		save = (Button) findViewById(R.id.saveStep);
 
-		if (!_acctMgr.hasLinkedAccount()){
-			_acctMgr.startLink((Activity) context, 2);
-		} else {
-			downloadImage(_step.getImage());
-		}
-
-		script.setText(_step.getScript());
-
 		uploadImage.setOnClickListener(new UploadListener());
 
 		save.setOnClickListener(new SaveListener());
-	}
 
-	private void downloadImage(String url) {
-		
-		DbxFile image = null;
-		try {
-			DbxFileSystem dbxFs = DbxFileSystem.forAccount(_acctMgr.getLinkedAccount());
+		context = this;
 
-			image = dbxFs.open(new DbxPath(url));
 
-			FileInputStream in = image.getReadStream();
-			BufferedInputStream buf = new BufferedInputStream(in);
-			byte[] bitMapA= new byte[buf.available()];
-			buf.read(bitMapA);
-			Bitmap bM = BitmapFactory.decodeByteArray(bitMapA, 0, bitMapA.length);
-			_image.setImageBitmap(bM);
-			if (in != null) {
-				in.close();
+		if (Register.register.containsKey("editStep")){
+			_step = (Step) Register.register.get("editStep");
+
+			if (!DropBoxService.hasLinkedAccount()){
+				DropBoxService.linkAccount(this, 2);
+			} else {
+				if (!(_step.getImage() == null)){
+					_image.setImageBitmap(DropBoxService.downloadImage(_step.getImage()));
+				}
 			}
-			if (buf != null) {
-				buf.close();
-			}
-
-		} catch (Unauthorized e) {
-			e.printStackTrace();
-		} catch (InvalidPathException e) {
-			e.printStackTrace();
-		} catch (DbxException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			image.close();
+			script.setText(_step.getScript());
 		}
 	}
+
+
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -130,15 +82,29 @@ public class AddorEditStep extends Activity {
 		@Override
 		public void onClick(View v){
 
-			if (!_acctMgr.hasLinkedAccount()){
-				_acctMgr.startLink((Activity) context, 0);
+			if (!DropBoxService.hasLinkedAccount()){
+				DropBoxService.linkAccount((Activity) context, 0);
 			} else {
-				if (!(imageBitmap == null)){
-					uploadPhoto();
-				} else {
-					rewriteJSON();
+				if (!Register.register.containsKey("editStep")){
+					addStepAndUpdate();
 				}
+				if (!(imageBitmap == null)){
+					imageURL = DropBoxService.uploadPhoto(imageBitmap);
+				} 
+				rewriteJSON();
 			}
+		}
+
+		private void addStepAndUpdate() {
+
+			Task current = (Task) Register.register.get("currentTask");
+			List<Step> steps = current.getSteps();
+			Step added = new Step();
+			steps.add(added);
+			current.addSteps(steps);
+			Register.register.put("currentTask", current);
+			Register.register.put("editStep", added);
+			Register.register.put(Register.STEP_INDEX, steps.size() - 1);
 		}
 
 	}
@@ -148,17 +114,18 @@ public class AddorEditStep extends Activity {
 		if (requestCode == 0) {
 			if (resultCode == Activity.RESULT_OK) {
 				if (!(imageBitmap == null)){
-					uploadPhoto();
-				} else {
-					rewriteJSON();
-				}
+					imageURL = DropBoxService.uploadPhoto(imageBitmap);
+				} 
+				rewriteJSON();
 			} else {
 				// ... Link failed or was cancelled by the user.
 			}
 		} else if (requestCode == 1 && resultCode == Activity.RESULT_OK){
 			setPhoto(data);
 		} else if (requestCode == 2 && resultCode == Activity.RESULT_OK){
-			downloadImage(_step.getImage());
+			if (!(_step.getImage() == "")){
+				_image.setImageBitmap(DropBoxService.downloadImage(_step.getImage()));
+			}
 		}
 		else {
 			super.onActivityResult(requestCode, resultCode, data);
@@ -178,45 +145,7 @@ public class AddorEditStep extends Activity {
 
 	}
 
-	private void uploadPhoto() {
-		DbxFile image = null;
-		try {
-			DbxFileSystem dbxFs = DbxFileSystem.forAccount(_acctMgr.getLinkedAccount());
 
-			int stepIndex = (Integer) Register.register.get("stepIndex") + 1;
-			Task currentTask = (Task) Register.register.get("currentTask");
-			String taskTitle = currentTask.getTitle();
-			
-			String imgURL = "Images/" + taskTitle + "/" + "Step" + stepIndex + ".jpg";
-			if (dbxFs.exists(new DbxPath(imgURL))){
-				image = dbxFs.open(new DbxPath(imgURL));
-			}
-
-			Bitmap bitmap = imageBitmap;
-			ByteArrayOutputStream bos = new ByteArrayOutputStream();
-			bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bos);
-			byte[] bitmapdata = bos.toByteArray();
-
-			FileOutputStream output = image.getWriteStream();
-
-			output.write(bitmapdata);
-
-			imageURL = imgURL;
-
-			rewriteJSON();
-
-		} catch (Unauthorized e) {
-			e.printStackTrace();
-		} catch (InvalidPathException e) {
-			e.printStackTrace();
-		} catch (DbxException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			image.close();
-		}
-	}
 
 	private class UploadListener implements OnClickListener{
 		@Override
@@ -240,7 +169,7 @@ public class AddorEditStep extends Activity {
 		List<Task> tasks = allTasks.getTasks();
 
 		step.addScript(script.getText().toString());
-		if (!(imageURL == null)){
+		if (!(imageURL == "")){
 			step.addImage(imageURL);
 		}
 		steps.set(stepIndex, step);
@@ -250,45 +179,13 @@ public class AddorEditStep extends Activity {
 		APIResponse data = new APIResponse();
 		data.setTasks(tasks);
 
-		ObjectWriter writer = new ObjectMapper().writer();
+		DropBoxService.writeToDropBox(data);
 
-		String json = "";
-		try {
-			json = writer.writeValueAsString(data);
-		} catch (JsonGenerationException e1) {
-			e1.printStackTrace();
-		} catch (JsonMappingException e1) {
-			e1.printStackTrace();
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
-
-		updateDropBox(json);
+		Intent intent = new Intent(AddorEditStep.this, MainActivity.class);
+		startActivity(intent);
 
 	}
 
-	private void updateDropBox(String json){
-		DbxFile testFile = null;
-		try {
-			DbxFileSystem dbxFs = DbxFileSystem.forAccount(_acctMgr.getLinkedAccount());
-			testFile = dbxFs.open(new DbxPath("glass1.txt"));
-			if (!json.contentEquals("")){
-				testFile.writeString(json);
-			}
-			Log.d("Dropbox Test", "File contents: " + json);
-			Intent intent = new Intent(AddorEditStep.this, MainActivity.class);
-			startActivity(intent);
-		} catch (Unauthorized e) {
-			e.printStackTrace();
-		} catch (InvalidPathException e) {
-			e.printStackTrace();
-		} catch (DbxException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			testFile.close();
-		}
-	}
+
 
 }

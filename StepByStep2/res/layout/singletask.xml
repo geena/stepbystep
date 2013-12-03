@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/addTitle"
             android:hint="@string/addTitle"
-            android:inputType="text"/>"
+            android:inputType="text"/>
         </LinearLayout>
 
         <Button

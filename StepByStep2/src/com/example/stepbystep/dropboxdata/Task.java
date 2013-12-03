@@ -13,6 +13,11 @@ public class Task
 	private List<Step> _steps;
 	private Exception _exception;
 	
+	public Task(String title, List<Step> steps){
+		_title = title;
+		_steps = steps;
+	}
+	
 	@JsonProperty("title")
 	public void addTitle(String title)
 	{

@@ -13,7 +13,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
@@ -21,6 +23,7 @@ public class Tasks extends Activity{
 
 	ListView tasks;
 	APIResponse allTasks = new APIResponse();
+	Button addTask;
 	List<Task> _tasks;
 	SimpleAdapter tasksAdpt;
 
@@ -31,6 +34,8 @@ public class Tasks extends Activity{
 		setContentView(R.layout.tasks);
 
 		allTasks = (APIResponse) Register.register.get("allTasks");
+		
+		addTask = (Button) findViewById(R.id.addTask);
 
 		tasks = (ListView) findViewById(R.id.tasks);
 
@@ -40,7 +45,9 @@ public class Tasks extends Activity{
 		
 		tasks.setAdapter(tasksAdpt);
 		
-		tasks.setOnItemClickListener(new taskClickListener());
+		tasks.setOnItemClickListener(new TaskClickListener());
+		
+		addTask.setOnClickListener(new AddTaskClickListener());
 
 	}
 
@@ -60,7 +67,7 @@ public class Tasks extends Activity{
 		return result;
 	}
 
-	public class taskClickListener implements AdapterView.OnItemClickListener{
+	public class TaskClickListener implements AdapterView.OnItemClickListener{
 
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
@@ -74,5 +81,16 @@ public class Tasks extends Activity{
 
 			}
 		}
+	private class AddTaskClickListener implements OnClickListener{
+
+		@Override
+		public void onClick(View v) {
+			
+	         Intent intent = new Intent(Tasks.this, SingleTask.class);
+			 startActivity(intent);
+			
+		}
+		
+	}
 
 }

@@ -114,7 +114,7 @@ public class MainActivity extends Activity {
 			String contents = testFile.readString();
 			Log.d("Dropbox Test", "File contents: " + contents);
 			APIResponse response = parse(contents);
-			Register.register.put("allTasks", response);
+			Register.register.put(Register.ALL_DATA, response);
 			Intent intent = new Intent(MainActivity.this, Tasks.class);
 			startActivity(intent);
 		} catch (Unauthorized e) {

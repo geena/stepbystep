@@ -13,12 +13,15 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
 public class EditSteps extends Activity{
 
+	Button addStep;
 	ListView _steps;
 	Task _currentTask;
 	SimpleAdapter stepsAdpt;
@@ -32,12 +35,16 @@ public class EditSteps extends Activity{
 		_currentTask = (Task) Register.register.get("currentTask");
 
 		_steps = (ListView) findViewById(R.id.steps);
+		
+		addStep = (Button) findViewById(R.id.addStep);
 
 		stepsAdpt = new SimpleAdapter(this, createMap(_currentTask.getSteps()), android.R.layout.simple_list_item_1, new String[] {"result"}, new int[] {android.R.id.text1});
 		
 		_steps.setAdapter(stepsAdpt);
 		
 		_steps.setOnItemClickListener(new stepClickListener());
+		
+		addStep.setOnClickListener(new AddStepListener());
 
 	}
 
@@ -71,5 +78,17 @@ public class EditSteps extends Activity{
 
 			}
 		}
+	
+	private class AddStepListener implements OnClickListener{
+
+		@Override
+		public void onClick(View arg0) {
+			
+	         Intent intent = new Intent(EditSteps.this, AddorEditStep.class);
+			 startActivity(intent);
+			
+		}
+		
+	}
 
 }
