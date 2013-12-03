@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Step By Step Murph2</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="App_Home">Step By Step</string>
+    <string name="Need_help">NEED HELP ?</string>
+     <string name="choose_a_task">CHOOSE A TASK</string>
+    <string name="grocery_shopping">Grocery Shopping</string>
+    <string name="library">Library</string>
+    <string name="custom">Custom</string>
+    <string name="helper_settings">Helper Settings</string>
+    <string name="video_call">CALL MOM! (VIDEO)</string>
+    <string name="audio_call">CALL MOM! (AUDIO)</string>
+    <string name="thank_you">Great Job!</string>
+    <string name="done">DONE ? </string>
+    <string name="enter_the_store">Enter The Store</string>
+    <string name="pick_up_pasta">Pick Up 2 Boxes Of Pasta</string>
+    <string name="go_to_the_cashier">Go To The Cashier</string>
+    <string name="image">IMAGE</string>
+    <string name="title_activity_emergency">EmergencyActivity</string>
+    <string name="title_activity_choose_task">ChooseTask</string>
+    <string name="background"></string>
+    <string name="pick_an_activity">Pick An Activity</string>
+    <string name="phase_settings">Choose Connection</string>
+    <string name="start_video_call">Start Video Call?</string>
+    <string name="start_audio_call">Start Audio Call?</string>
+    <string name="start_video_call_helper">Video call with helper?</string>
+    <string name="start_audio_call_helper">Audeo call with helper?</string>
+    <string name="step_no_1">STEP_NO</string>
+    <string name="nextChoice">Next Choice</string>
+    <string name="back">Back</string>
+    <string name="tap">  tap</string>
+    <string name="tap_tap">  tap-tap</string>
+    <string name="i_want_this">  I want this</string>
+    <string name="i_need_help">  I need help</string>
+    <string name="callOptions">Call Options</string>
+    <string name="task_name">TASK_NAME</string>
+    <string name="UniqueLogin"></string>
+    <string name="stepDesc">STEP_DESC</string>
+    <string name="welcome">"Welcome "</string>
+    <string name="loginInput"></string>
+    <string name="loginTxt">Enter Glass Id -</string>
+    <string name="Login">Login</string>
+
+</resources>
