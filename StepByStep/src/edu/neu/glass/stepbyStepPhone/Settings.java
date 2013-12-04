@@ -1,7 +1,5 @@
 package edu.neu.glass.stepbyStepPhone;
 
-
-
 import edu.neu.glass.stepByStep.R;
 import android.app.Activity;
 import android.os.Bundle;

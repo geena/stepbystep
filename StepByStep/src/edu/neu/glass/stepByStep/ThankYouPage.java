@@ -1,6 +1,5 @@
 package edu.neu.glass.stepByStep;
 
-import edu.neu.glass.stepByStep.R;
 import edu.neu.mhealth.api.KeyValueAPI;
 import android.os.AsyncTask;
 import android.os.Bundle;

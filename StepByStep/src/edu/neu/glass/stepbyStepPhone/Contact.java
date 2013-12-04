@@ -1,9 +1,9 @@
 package edu.neu.glass.stepbyStepPhone;
 
+import edu.neu.glass.stepByStep.R;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
-import edu.neu.glass.stepByStep.R;
 
 public class Contact extends Activity {
 	

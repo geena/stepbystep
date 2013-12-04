@@ -5,8 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
-
 import edu.neu.glass.stepByStep.R;
 import edu.neu.glass.stepbyStepPhone.dropboxdata.Step;
 import edu.neu.glass.stepbyStepPhone.dropboxdata.Task;

@@ -1,6 +1,5 @@
 package edu.neu.glass.stepByStep;
 
-import edu.neu.glass.stepByStep.R;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;

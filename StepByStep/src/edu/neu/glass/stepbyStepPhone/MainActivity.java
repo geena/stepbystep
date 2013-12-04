@@ -45,7 +45,7 @@ public class MainActivity extends Activity {
 
 		context = this;
 
-		_acctMgr = DbxAccountManager.getInstance(getApplicationContext(), "j1bohgxwhlirlq6", "kamif5qmk6m7und");
+		_acctMgr = DbxAccountManager.getInstance(getApplicationContext(), "v8j9ryp4ob0xct6", "5icwv655dpleqsi");
 
 		activities = (Button) findViewById(R.id.activities);
 		settings = (Button) findViewById(R.id.settings);

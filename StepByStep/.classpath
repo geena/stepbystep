@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry exported="true" kind="lib" path="C:/Users/akotha/Downloads/abhinav/android/jackson-core-asl-1.9.0.jar"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/akotha/Downloads/abhinav/android/jackson-mapper-asl-1.9.7.jar"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/akotha/Downloads/abhinav/android/json-lib-2.4-jdk15.jar"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/akotha/Downloads/abhinav/android/json-simple-1.1.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/akotha/Downloads/abhinav/android/ovxAndroidSDK/ovxSDK-Android-1.6.2/ovx.jar"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/akotha/Downloads/abhinav/android/KeyValueAPI.jar"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/akotha/Downloads/abhinav/android/xstream-1.4.5.jar"/>
-	<classpathentry kind="lib" path="C:/Users/akotha/Downloads/abhinav/repo/phidd-team1/StepByStep2/libs/dropbox-sync-sdk-android.jar"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
-	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Reggie/Downloads/KeyValueAPI.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Reggie/Downloads/ovxAndroidSDK/ovxSDK-Android-1.6.2/ovx.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Reggie/Downloads/dropbox-android-sync-sdk-2.0.3/dropbox-android-sync-sdk-2.0.3/libs/dropbox-sync-sdk-android.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Reggie/sandbox/Vendi/libs/jackson-core-asl-1.9.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Reggie/sandbox/Vendi/libs/jackson-mapper-asl-1.9.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Reggie/sandbox/Vendi/libs/json-lib-2.4-jdk15.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Reggie/Downloads/adt-bundle-windows-x86_64-20131030/adt-bundle-windows-x86_64-20131030/sdk/platforms/android-19/android.jar"/>
+	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
