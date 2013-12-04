@@ -3,7 +3,6 @@ package edu.neu.glass.stepByStep;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
-import android.opengl.Visibility;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -19,6 +18,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import edu.neu.glass.stepbyStepPhone.MainActivity;
 
 
 public class AppHome extends Activity implements GestureDetector.OnGestureListener,OnDoubleTapListener {
@@ -81,7 +81,7 @@ public class AppHome extends Activity implements GestureDetector.OnGestureListen
 			homeLayout.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					Intent i = new Intent(AppHome.this,PhoneHome.class);
+					Intent i = new Intent(AppHome.this,MainActivity.class);
 					startActivity(i);
 				}
 			});

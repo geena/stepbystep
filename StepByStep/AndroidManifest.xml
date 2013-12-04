@@ -108,6 +108,24 @@
              android:configChanges="orientation|screenSize">
         </activity>
         
-    </application>
+        <activity android:name="edu.neu.glass.stepbyStepPhone.MainActivity" android:label="@string/app_name"/>
+        <activity android:name="edu.neu.glass.stepbyStepPhone.Tasks"/>
+        <activity android:name="edu.neu.glass.stepbyStepPhone.SingleTask"/>
+        <activity android:name="edu.neu.glass.stepbyStepPhone.EditSteps"/>
+        <activity android:name="edu.neu.glass.stepbyStepPhone.AddorEditStep"/>
+        <activity android:name="edu.neu.glass.stepbyStepPhone.PairGlass"/>
+        <activity android:name="edu.neu.glass.stepbyStepPhone.Contact"/>
+        <activity android:name="edu.neu.glass.stepbyStepPhone.PhotoSelector"/>
+        <activity android:name="com.dropbox.sync.android.DbxAuthActivity"/>
+        <activity android:name="com.dropbox.client2.android.AuthActivity" android:launchMode="singleTask">
+            <intent-filter><data android:scheme="db-j1bohgxwhlirlq6"/>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <service android:name="com.dropbox.sync.android.DbxSyncService" 
+            android:label="Dropbox Sync" android:exported="false" android:enabled="true"/>
+        </application>
 
 </manifest>

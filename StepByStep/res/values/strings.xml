@@ -43,5 +43,29 @@
     <string name="loginInput"></string>
     <string name="loginTxt">Enter Glass Id -</string>
     <string name="Login">Login</string>
-
+    <string name="activities">Activities</string>
+    <string name="settings">Pair Glass</string>
+    <string name="help">Emergency Contact</string>
+    <string name="addTask">Add a Task</string>
+    <string name="choosePhase">Choose Phase</string>
+    <string name="editSteps">Edit Steps</string>
+    <string name="addStep">Add a Step</string>
+    <string name="addeditstep">Add/Edit Step</string>
+    <string name="uploadImage">Upload Image</string>
+    <string name="savechanges">Save Changes</string>
+    <string name="taskTitle">Task Title</string>
+    <string name="addTitle">Add a Title</string>
+    <string name="pairglass">Pair with Glass</string>
+    <string name="glassid">Enter Glass ID</string>
+    <string name="syncglass">Sync with Glass</string>
+    <string name="addcontact">Add Emergency Contact</string>
+    <string name="contactname">Contact Name</string>
+    <string name="contactnumber">Contact Number</string>
+    <string name="addphotoexisting">Upload Photo</string>
+    <string name="addphotonew">Take Photo</string>
+    <string name="changeimage">Change Image</string>
+    <string name="editscript">Add a Description</string>
+    <string name="switchUser">User View</string>
+    <string name="endcall">End Call</string>
+    
 </resources>
