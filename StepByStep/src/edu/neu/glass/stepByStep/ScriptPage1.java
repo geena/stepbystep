@@ -12,7 +12,6 @@ import com.openclove.ovx.OVXCallListener;
 import com.openclove.ovx.OVXException;
 import com.openclove.ovx.OVXView;
 
-import edu.neu.glass.stepByStep.R;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
